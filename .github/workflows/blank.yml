@@ -21,4 +21,4 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Send email
         run: |
-          echo "Make the most out of Linux!" | mail -s "Welcome to Linux" niyonkuruelisa@gmail.com
+          mail -s "Welcome to Linux" niyonkuruelisa@gmail.com
