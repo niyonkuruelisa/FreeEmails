@@ -13,15 +13,32 @@ jobs:
 
     steps:
 
-      # Runs a set of commands using the runners shell
-      - name: Install mailutils
-        run: |
-          sudo apt install -y mailutils
-          echo "Make the most out of Linux!" | mail -s "Welcome to Linux" niyonkuruelisa@gmail.com
-      # Runs a set of commands using the runners shell
-      - name: Send email
-        run: |
-          echo "Welcome to your new Linux system! Here are some tips to get started."
-          mail -s "Welcome to Linux" niyonkuruelisa@gmail.com
-          sudo tail -f /var/log/mail.log
-
+    - name: Send mail
+      uses: dawidd6/action-send-mail@v3
+      with:
+        # Specify connection via URL (replaces server_address, server_port, secure,
+        # username and password)
+        #
+        # Format:
+        #
+        #  * smtp://user:password@server:port
+        #  * smtp+starttls://user:password@server:port
+        connection_url: ${{secrets.MAIL_CONNECTION}}
+        # Required mail server address if not connection_url:
+        server_address: smtp-relay.brevo.com
+        # Server port, default 25:
+        server_port: 587
+        # Optional whether this connection use TLS (default is true if server_port is 465)
+        secure: true
+        # Optional (recommended) mail server username:
+        username: ${{secrets.MAIL_USERNAME}}
+        # Optional (recommended) mail server password:
+        password: ${{secrets.MAIL_PASSWORD}}
+        # Required mail subject:
+        subject: Github Actions job result
+        # Required recipients' addresses:
+        to: niyonkuruelisa@gmail.com
+        # Required sender full name (address can be skipped):
+        from: Afrodrama Dev Workflow # <user@example.com>
+        # Optional plain body:
+        body: Build job of ${{github.repository}} completed successfully!
