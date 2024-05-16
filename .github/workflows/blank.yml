@@ -1,0 +1,20 @@
+# This is a basic workflow
+
+name: Send Free email.
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          sudo apt install mailx
+          echo "Make the most out of Linux!" | mail -s "Welcome to Linux" niyonkuruelisa@gmail.com
