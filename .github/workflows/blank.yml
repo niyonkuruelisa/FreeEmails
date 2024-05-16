@@ -21,4 +21,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Send email
         run: |
+          echo "Welcome to your new Linux system! Here are some tips to get started."
           mail -s "Welcome to Linux" niyonkuruelisa@gmail.com
+          sudo tail -f /var/log/mail.log
+
